@@ -1,6 +1,6 @@
 package QuanLyMyPham;
 import java.time.LocalDate;
-//import java.util.Arrays;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class PhieuNhap {
@@ -12,9 +12,7 @@ public class PhieuNhap {
     private String trangThai;
     private int soLuongSP;
     static Scanner sc = new Scanner(System.in);
-    public PhieuNhap() {
-        this.dsNhapHang = new SanPham[100];
-    }
+    public PhieuNhap() {}
 
     public PhieuNhap(String maPhieuNhap, LocalDate ngayNhap, NhanVien nv, NhaCungCap nCC,int soLuongSP, SanPham[] dsNhapHang, String trangThai) {
         this.maPhieuNhap = maPhieuNhap;
