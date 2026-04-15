@@ -4,22 +4,35 @@ import java.time.LocalDate;
 public abstract class NhanVien extends ConNguoi {
     private String maNhanVien;
     private String soCCCD;
+    private double ngayCong;
     private float luongCoBan;
-    private Double ngayCong;
-    private String chucVu;
+//    private String chucVu;
     private boolean trangThai;
     private LocalDate ngayVaoLam;
     static  Scanner sc=new Scanner(System.in);
-    public NhanVien(){}
-    public NhanVien(String maNhanVien,String soCCCD,float luongCoBan,Double ngayCong,String chucVu,LocalDate ngayVaoLam,boolean trangThai){
-        this.maNhanVien=maNhanVien;
-        this.soCCCD=soCCCD;
-        this.luongCoBan=luongCoBan;
-        this.ngayCong=ngayCong;
-        this.chucVu=chucVu;
-        this.ngayVaoLam=ngayVaoLam;
-        this.trangThai=trangThai;
+    public NhanVien(){
+        super();
     }
+
+//    public NhanVien(String maNhanVien,String soCCCD,float luongCoBan,Double ngayCong,String chucVu,LocalDate ngayVaoLam,boolean trangThai){
+//        this.maNhanVien=maNhanVien;
+//        this.soCCCD=soCCCD;
+//        this.luongCoBan=luongCoBan;
+//        this.ngayCong=ngayCong;
+//        this.chucVu=chucVu;
+//        this.ngayVaoLam=ngayVaoLam;
+//        this.trangThai=trangThai;
+//    }
+
+    public NhanVien(String hoTen, String sdt, String email, String gioiTinh,LocalDate ngaySinh,
+                    String maNhanVien, String soCCCD,double ngayCong,float luongCoBan) {
+        super(hoTen, sdt, email, gioiTinh, ngaySinh);
+        this.maNhanVien = maNhanVien;
+        this.soCCCD = soCCCD;
+        this.ngayCong= ngayCong;
+        this.luongCoBan= luongCoBan;
+    }
+
     public String getMaNhanVien() {
         return maNhanVien;
     }
@@ -33,27 +46,32 @@ public abstract class NhanVien extends ConNguoi {
         this.soCCCD = soCCCD;
     }
     public float getLuongCoBan() {return luongCoBan;}
-    public void setLuongCoban(float luongCoBan) {
+    public void setLuongCoBan(float luongCoBan) {
         this.luongCoBan = luongCoBan;
     }
-    public Double getNgayCong() {return ngayCong;}
-    public void setNgayCong(Double ngayCong) {
+//    public String getChucVu(){return chucVu;}
+//    public void setChucVu(String chucVu){this.chucVu=chucVu;}
+    public double getNgayCong() {return ngayCong;}
+    public void setNgayCong(double ngayCong) {
         this.ngayCong = ngayCong;
     }
-    public String getChucVu(){return chucVu;}
-    public void setChucVu(String chucVu){this.chucVu=chucVu;}
+//
     public LocalDate getNgayVaoLam(){return ngayVaoLam;}
     public void setNgayVaoLam(LocalDate ngayVaoLam){this.ngayVaoLam=ngayVaoLam;}
     public boolean isTrangThai() {return trangThai;}
     public void setTrangThai(boolean trangThai) {this.trangThai = trangThai;}
 
-    public void Nhap() {
+    public void nhap() {
         super.nhap();
         while (true) {
             System.out.print("Nhap ma nhan vien (5 chu so) ");
-            this.maNhanVien = sc.nextLine().trim();
-            if (this.maNhanVien.matches("\\d{5}")) {
-                setMaNhanVien("NV" + maNhanVien);
+//            this.maNhanVien = sc.nextLine().trim();
+//            if (this.maNhanVien.matches("\\d{5}")) {
+//                setMaNhanVien("NV" + maNhanVien);
+//                break;
+            String input = sc.nextLine().trim();
+            if (input.matches("\\d{5}")) {
+                this.maNhanVien = "NV" + input;
                 break;
             } else {
                 System.out.println("Loi: Ma nhan vien phai co dung 5 so");
@@ -68,16 +86,20 @@ public abstract class NhanVien extends ConNguoi {
                 System.err.println("Loi: So CCCD phai co dung 12 so");
             }
         }
-        System.out.print("Nhap vao ngay cong ");
-        this.ngayCong = sc.nextDouble();
-        System.out.println("Chon chuc vu:");
-        System.out.println("1. Quan Ly");
-        System.out.println("2. Thu Ngan");
-        System.out.println("3. Nhan Vien CSKH");
-        System.out.print("Lua chon cua ban (1-3): ");
-        int luaChon = sc.nextInt();
-        sc.nextLine();
-        this.luongCoBan(luaChon);
+        while (true) {
+            try {
+                System.out.print("Nhap vao ngay cong (0 - 31): ");
+                this.ngayCong = Double.parseDouble(sc.nextLine());
+
+                if (this.ngayCong >= 0 && this.ngayCong <= 31) {
+                    break;
+                } else {
+                    System.out.println("Loi: Ngay cong phai tu 0 den 31");
+                }
+            } catch (Exception e) {
+                System.out.println("Nhap sai dinh dang, vui long nhap lai!");
+            }
+        }
        while (true) {
            try {
                 System.out.print("Nhap ngay vao lam (yyyy-mm-dd): ");
@@ -98,15 +120,28 @@ public abstract class NhanVien extends ConNguoi {
         this.trangThai = (st == 1);
         sc.nextLine();
     }
+
+//    @Override
+//    public String toString() {
+//        return String.format("| %-10s | %-12s | %-12s | %-10s | %-10.0f |",
+//                this.getMaNhanVien(),
+//                this.getSoCCCD(),
+//                this.getNgayVaoLam(),
+//                this.getVaiTro(),
+//                this.getLuongCoBan() * this.getNgayCong()
+//        );
+//    }
+
     @Override
     public String toString() {
-        return super.toString() + String.format("| %-10s | %-13s | %-15s | %-12s | %, -15.0f | %-5d |",
-                this.maNhanVien,
-                this.soCCCD,
-                this.chucVu,
-                this.ngayVaoLam, // Cột mới thêm vào
-                this.luongCoBan * this.ngayCong,
-                this.trangThai ? "Dang lam" : "Nghi lam");
+        return String.format("| %-10s | %-12s | %-12s | %-10s | %-10s | %-12.0f |",
+                this.getMaNhanVien(),
+                this.getSoCCCD(),
+                this.getNgayVaoLam(),
+                this.getVaiTro(),
+                (this.isTrangThai() ? "Dang lam" : "Nghi"),
+                this.getLuongCoBan() * this.getNgayCong()
+        );
     }
 
     public void xuat() {
@@ -115,44 +150,32 @@ public abstract class NhanVien extends ConNguoi {
         String line = "---------------------------------------------------------------------------------------------";
         System.out.println(line);
         // Tiêu đề cột cũng phải khớp định dạng với toString()
-        System.out.printf("| %-10s | %-13s | %-15s | %-12s | %-15s | %-5s |\n",
-                "Ma NV", "So CCCD", "Chuc vu", "Ngay vao", "Luong", "TT");
+        System.out.printf("| %-10s | %-13s | %-12s | %-5s |\n",
+                "Ma NV", "So CCCD", "Ngay vao", "TT");
         System.out.println(line);
         System.out.println(this.toString());
         System.out.println(line);
     }
 
-    public void chamCong(){
-        this.ngayCong++;
-        System.out.println(this.maNhanVien +" Da cham cong thanh cong");
-        System.out.println("So ngay cong hien tai " +this.ngayCong);
-    }
-    public abstract void tinhLuong();
+//    @Override
+//    public String toString() {
+//    return String.format("| %-10s | %-13s | %-12s | %-10.2f | %-10b|",
+//            maNhanVien, soCCCD, ngayVaoLam, ngayCong,trangThai);
+//}
+//
+//    public void xuat() {
+//        System.out.println(this.toString()); // Các lớp con sẽ tự động dùng toString của riêng nó
+//    }
 
-    //public abstract void hienThiTongLuong();
-    public String getVaiTro() {
-        return "Chuc vu hien tai: " + this.chucVu;
-    }
-    public void luongCoBan(int luaChon){
-        switch (luaChon) {
-            case 1:
-                this.chucVu = "Quan Ly";
-                this.luongCoBan = 600000f;
-                break;
-            case 2:
-                this.chucVu = "Thu Ngan";
-                this.luongCoBan = 300000f;
-                break;
-            case 3:
-                this.chucVu = "Nhan Vien CSKH";
-                this.luongCoBan = 300000f;
-                break;
-            default:
-                this.chucVu = "Chua xac dinh";
-                this.luongCoBan = 200000f;
-                break;
+    public void chamCong() {
+        if (this.ngayCong < 31) {
+            this.ngayCong++;
+            System.out.println(this.maNhanVien + " Da cham cong thanh cong");
+            System.out.println("So ngay cong hien tai " + this.ngayCong);
         }
     }
+    public abstract double tinhLuong();
+    public abstract String getVaiTro();
 }
 
 
