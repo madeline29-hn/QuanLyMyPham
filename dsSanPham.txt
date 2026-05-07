@@ -1,0 +1,8 @@
+SP00001;Son;Son li;Mac;550000.0;NCC12345;Unilever;Ho Chi Minh;0912345678;unilever@gmail.com;2024-02-03;2027-02-03;Phap;true;Tao mau moi;68
+SP00002;Son;Son bong;Peripera;180000.0;NCC12345;Unilever;Ho Chi Minh;0912345678;unilever@gmail.com;2023-01-02;2026-01-02;Han Quoc;true;Tao mau moi;50
+SP00003;Phan phu;Phan phu bot;FunnyElves;260000.0;NCC12345;Unilever;Ho Chi Minh;0912345678;unilever@gmail.com;2025-03-20;2028-03-20;Trung Quoc;true;Rao nen, min da;50
+SP00004;Phan phu;Phan phu nen;Maybelline;350000.0;NCC12345;Unilever;Ho Chi Minh;0912345678;unilever@gmail.com;2026-01-01;2029-01-01;My;true;Rao nen, min da;50
+SP00005;Kem duong;Duong da body;Vaseline;250000.0;NCC12345;Unilever;Ho Chi Minh;0912345678;unilever@gmail.com;2024-02-20;2027-02-20;Thai Lan;true;Duong am;50
+SP00006;Kem duong;Kem duong da mat;CeraVe;240000.0;NCC12345;Unilever;Ho Chi Minh;0912345678;unilever@gmail.com;2024-05-03;2027-05-03;My;true;Cap am;48
+SP00007;Dung cu;Mut tan nen;Amortals;80000.0;NCC12345;Unilever;Ho Chi Minh;0912345678;unilever@gmail.com;2025-04-05;2028-04-05;Trung Quoc;true;Giup nen tep vao da;50
+SP00008;Dung cu;Co makeup;ShuShu;210000.0;NCC12345;Unilever;Ho Chi Minh;0912345678;unilever@gmail.com;2023-10-10;2026-10-10;Trung Quoc;true;Tao khoi;68

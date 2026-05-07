@@ -1,4 +1,5 @@
 package QuanLyMyPham;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class DungCu extends SanPham{
@@ -10,7 +11,9 @@ public class DungCu extends SanPham{
 
     }
     
-    public DungCu(String chatLieu, String phanLoai){
+    public DungCu(String maSP, String tenSanPham, String thuongHieu, String phanLoai, double gia, int soLuong,
+        LocalDate ngaySX, LocalDate ngayHH, String nuocSX, NhaCungCap nhaCungCap, boolean trangThai, String congDung, String chatLieu){
+        super(maSP, tenSanPham, thuongHieu,phanLoai, gia, soLuong, ngaySX, ngayHH, nuocSX, nhaCungCap, trangThai, congDung);
         this.chatLieu = chatLieu;
         this.phanLoai = phanLoai;
     }
@@ -23,24 +26,19 @@ public class DungCu extends SanPham{
         this.chatLieu = chatLieu;
     }
 
-    public String getPhanLoai(){
-        return phanLoai;
-    }
-
-    public void setPhanLoai(String phanLoai){
-        this.phanLoai = phanLoai;
-    }
-
     public boolean ktChatLieu(){
         return this.chatLieu != null && ! this.chatLieu.isEmpty();
     }
 
-    public boolean ktPhanLoai(){
-        return this.phanLoai != null && ! this.phanLoai.isEmpty();
+    public String thongTinDungCu(){
+        return "Dung cu [Chat lieu: " + chatLieu + "]";
     }
 
-    public String thongTinDungCu(){
-        return "Dung cu [Chat lieu: " + chatLieu + ", Phan loai: " + phanLoai + "]";
+    public void hienThiKiemTraDungCu(){
+        System.out.println("\n--- Tong hop thong tin ---");
+        System.out.println(this.toString());
+        System.out.println("Kiem tra chat lieu: " + (this.ktChatLieu() ? "Hop le" : "Khong hop le"));
+        System.out.println("Thong tin chi tiet: " + this.thongTinDungCu());
     }
 
     public void nhap(){
@@ -53,9 +51,15 @@ public class DungCu extends SanPham{
             } else {
                 System.out.println("Chat lieu khong duoc de trong, vui long nhap lai!");
             }
-        }
+        }  
+    }
 
-        while(true);
-        
+    @Override
+    public String toString(){
+        return super.toString() + String.format("|%-10s |", chatLieu);
+    }
+
+    public void xuat(){
+        System.out.println(toString());
     }
 }

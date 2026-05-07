@@ -1,179 +1,187 @@
 package QuanLyMyPham;
 import java.util.Scanner;
 import java.time.LocalDate;
+
 public abstract class NhanVien extends ConNguoi {
     private String maNhanVien;
     private String soCCCD;
     private double ngayCong;
-    private float luongCoBan;
-//    private String chucVu;
+    private double luongCoBan;
+    private String chucVu;
     private boolean trangThai;
     private LocalDate ngayVaoLam;
-    static  Scanner sc=new Scanner(System.in);
-    public NhanVien(){
+
+    static Scanner sc = new Scanner(System.in);
+
+    public NhanVien() {
         super();
     }
 
-//    public NhanVien(String maNhanVien,String soCCCD,float luongCoBan,Double ngayCong,String chucVu,LocalDate ngayVaoLam,boolean trangThai){
-//        this.maNhanVien=maNhanVien;
-//        this.soCCCD=soCCCD;
-//        this.luongCoBan=luongCoBan;
-//        this.ngayCong=ngayCong;
-//        this.chucVu=chucVu;
-//        this.ngayVaoLam=ngayVaoLam;
-//        this.trangThai=trangThai;
-//    }
-
-    public NhanVien(String hoTen, String sdt, String email, String gioiTinh,LocalDate ngaySinh,
-                    String maNhanVien, String soCCCD,double ngayCong,float luongCoBan) {
+    public NhanVien(String hoTen, String sdt, String email, String gioiTinh, LocalDate ngaySinh,
+                    String maNhanVien, String soCCCD, double ngayCong, float luongCoBan) {
         super(hoTen, sdt, email, gioiTinh, ngaySinh);
         this.maNhanVien = maNhanVien;
         this.soCCCD = soCCCD;
-        this.ngayCong= ngayCong;
-        this.luongCoBan= luongCoBan;
-    }
-
-    public String getMaNhanVien() {
-        return maNhanVien;
-    }
-    public void setMaNhanVien(String maNhanVien) {
-        this.maNhanVien = maNhanVien;
-    }
-    public String getSoCCCD() {
-        return soCCCD;
-    }
-    public void setSoCCCD(String soCCCD) {
-        this.soCCCD = soCCCD;
-    }
-    public float getLuongCoBan() {return luongCoBan;}
-    public void setLuongCoBan(float luongCoBan) {
+        this.ngayCong = ngayCong;
         this.luongCoBan = luongCoBan;
     }
-//    public String getChucVu(){return chucVu;}
-//    public void setChucVu(String chucVu){this.chucVu=chucVu;}
-    public double getNgayCong() {return ngayCong;}
-    public void setNgayCong(double ngayCong) {
-        this.ngayCong = ngayCong;
-    }
-//
-    public LocalDate getNgayVaoLam(){return ngayVaoLam;}
-    public void setNgayVaoLam(LocalDate ngayVaoLam){this.ngayVaoLam=ngayVaoLam;}
-    public boolean isTrangThai() {return trangThai;}
-    public void setTrangThai(boolean trangThai) {this.trangThai = trangThai;}
 
-    public void nhap() {
-        super.nhap();
+    public String getMaNhanVien() { return maNhanVien; }
+    public void setMaNhanVien(String maNhanVien) { this.maNhanVien = maNhanVien; }
+
+    public String getSoCCCD() { return soCCCD; }
+    public void setSoCCCD(String soCCCD) { this.soCCCD = soCCCD; }
+
+    public double getLuongCoBan() { return luongCoBan; }
+    public void setLuongCoBan(double luongCoBan) { this.luongCoBan = luongCoBan; }
+
+    public String getChucVu() { return chucVu; }
+    public void setChucVu(String chucVu) { this.chucVu = chucVu; }
+
+    public double getNgayCong() { return ngayCong; }
+    public void setNgayCong(double ngayCong) { this.ngayCong = ngayCong; }
+
+    public LocalDate getNgayVaoLam() { return ngayVaoLam; }
+    public void setNgayVaoLam(LocalDate ngayVaoLam) { this.ngayVaoLam = ngayVaoLam; }
+
+    public boolean isTrangThai() { return trangThai; }
+    public void setTrangThai(boolean trangThai) { this.trangThai = trangThai; }
+
+    public void nhap(NhanVien[] ds, int soLuong) {
+        super.nhap(ds, soLuong);
         while (true) {
-            System.out.print("Nhap ma nhan vien (5 chu so) ");
-//            this.maNhanVien = sc.nextLine().trim();
-//            if (this.maNhanVien.matches("\\d{5}")) {
-//                setMaNhanVien("NV" + maNhanVien);
-//                break;
+            System.out.print("Nhap ma nhan vien (5 chu so): ");
             String input = sc.nextLine().trim();
             if (input.matches("\\d{5}")) {
-                this.maNhanVien = "NV" + input;
-                break;
+                String Ma = "NV" + input;
+                boolean trung = false;
+                for (int i = 0; i < soLuong; i++) {
+                    if (ds[i] != null && Ma.equalsIgnoreCase(ds[i].getMaNhanVien())) {
+                        trung = true;
+                        break;
+                    }
+                }
+                if (trung) {
+                    System.out.println("Loi: Ma nhan vien da ton tai!");
+                } else {
+                    this.maNhanVien = Ma;
+                    break;
+                }
             } else {
-                System.out.println("Loi: Ma nhan vien phai co dung 5 so");
+                System.out.println("Loi: Ma NV phai co dung 5 chu so!");
             }
         }
         while (true) {
-            System.out.print("Nhap so CCCD (12 so) ");
-            this.soCCCD = sc.nextLine();
-            if (this.soCCCD.matches("\\d{12}")) {
-                break;
+            System.out.print("Nhap so CCCD (12 so): ");
+            String inputCCCD = sc.nextLine().trim();
+            if (inputCCCD.matches("0\\d{11}")) {
+                boolean trungCCCD = false;
+                for (int i = 0; i < soLuong; i++) {
+                    if (ds[i] != null && inputCCCD.equals(ds[i].getSoCCCD())) {
+                        trungCCCD = true;
+                        break;
+                    }
+                }
+                if (trungCCCD) {
+                    System.out.println("Loi: So CCCD da ton tai!");
+                } else {
+                    this.soCCCD = inputCCCD;
+                    break;
+                }
             } else {
-                System.err.println("Loi: So CCCD phai co dung 12 so");
+                System.out.println("Loi: CCCD phai co dung 12 so!");
+            }
+        }
+
+        while (true) {
+            try {
+                System.out.print("Nhap ngay cong (0-31): ");
+                this.ngayCong = Double.parseDouble(sc.nextLine());
+                if (ngayCong >= 0 && ngayCong <= 31)
+                    break;
+                System.out.println("Loi: 0-31!");
+            } catch (Exception e) {
+                System.out.println("Nhap sai!");
             }
         }
         while (true) {
             try {
-                System.out.print("Nhap vao ngay cong (0 - 31): ");
-                this.ngayCong = Double.parseDouble(sc.nextLine());
-
-                if (this.ngayCong >= 0 && this.ngayCong <= 31) {
+                System.out.print("Nhap ngay vao lam (yyyy-mm-dd): ");
+                LocalDate d = LocalDate.parse(sc.nextLine().trim());
+                if (d.isBefore(LocalDate.now())) {
+                    this.ngayVaoLam = d;
                     break;
-                } else {
-                    System.out.println("Loi: Ngay cong phai tu 0 den 31");
                 }
+                System.out.println("Phai nho hon hom nay!");
             } catch (Exception e) {
-                System.out.println("Nhap sai dinh dang, vui long nhap lai!");
+                System.out.println("Sai dinh dang!");
             }
         }
-       while (true) {
-           try {
-                System.out.print("Nhap ngay vao lam (yyyy-mm-dd): ");
-                String inputDate = sc.nextLine().trim();
-               LocalDate parsedDate = LocalDate.parse(inputDate);
-               if (parsedDate.isBefore(LocalDate.now())) {
-                   this.ngayVaoLam = parsedDate;
-                   break;
-                } else {
-                    System.out.println("Loi: Ngay vao lam phai nho hon ngay hom nay (" + LocalDate.now() + ")!");
+        while (true) {
+            try {
+                System.out.print("Trang thai (1-Dang lam | 0-Nghi): ");
+                int st = Integer.parseInt(sc.nextLine());
+                if (st == 0 || st == 1) {
+                    this.trangThai = (st == 1);
+                    break;
                 }
-           } catch (Exception e) {
-               System.out.println("Dinh dang ngay khong hop le, vui long nhap lai (yyyy-mm-dd)!");
-           }
-       }
-        System.out.print("Nhap vao trang thai (1 - Dang lam, 0 - Nghi lam) ");
-        int st = sc.nextInt();
-        this.trangThai = (st == 1);
-        sc.nextLine();
+            } catch (Exception e) {
+            }
+            System.out.println("Nhap 0 hoac 1!");
+        }
+        this.chucVu = getVaiTro();
     }
-
-//    @Override
-//    public String toString() {
-//        return String.format("| %-10s | %-12s | %-12s | %-10s | %-10.0f |",
-//                this.getMaNhanVien(),
-//                this.getSoCCCD(),
-//                this.getNgayVaoLam(),
-//                this.getVaiTro(),
-//                this.getLuongCoBan() * this.getNgayCong()
-//        );
-//    }
 
     @Override
     public String toString() {
-        return String.format("| %-10s | %-12s | %-12s | %-10s | %-10s | %-12.0f |",
-                this.getMaNhanVien(),
-                this.getSoCCCD(),
-                this.getNgayVaoLam(),
+        String ngaySinhStr = (super.getNgaySinh() != null) ? super.getNgaySinh().toString() : "N/A";
+        return String.format("| %-8s | %-22s | %-11s | %-13s | %-11s | %-5s | %-22s | %-10s | %-10s |",
+                this.maNhanVien,
+                this.getHoTen(),
+                ngaySinhStr,
+                this.soCCCD,
+                this.getSdt(),
+                this.getGioiTinh(),
+                this.getEmail(),
                 this.getVaiTro(),
-                (this.isTrangThai() ? "Dang lam" : "Nghi"),
-                this.getLuongCoBan() * this.getNgayCong()
+                (this.trangThai ? "Dang lam" : "Nghi")
         );
     }
 
     public void xuat() {
-        // Tăng số lượng dấu gạch ngang để bảng không bị vỡ
-        super.xuat();
-        String line = "---------------------------------------------------------------------------------------------";
-        System.out.println(line);
-        // Tiêu đề cột cũng phải khớp định dạng với toString()
-        System.out.printf("| %-10s | %-13s | %-12s | %-5s |\n",
-                "Ma NV", "So CCCD", "Ngay vao", "TT");
-        System.out.println(line);
         System.out.println(this.toString());
-        System.out.println(line);
     }
 
-//    @Override
-//    public String toString() {
-//    return String.format("| %-10s | %-13s | %-12s | %-10.2f | %-10b|",
-//            maNhanVien, soCCCD, ngayVaoLam, ngayCong,trangThai);
-//}
-//
-//    public void xuat() {
-//        System.out.println(this.toString()); // Các lớp con sẽ tự động dùng toString của riêng nó
-//    }
-
-    public void chamCong() {
-        if (this.ngayCong < 31) {
-            this.ngayCong++;
-            System.out.println(this.maNhanVien + " Da cham cong thanh cong");
-            System.out.println("So ngay cong hien tai " + this.ngayCong);
-        }
+    public String toDataString() {
+        return getVaiTro() + ";" +
+                maNhanVien + ";" +
+                getHoTen() + ";" +
+                getNgaySinh() + ";" +
+                soCCCD + ";" +
+                getSdt() + ";" +
+                getEmail() + ";" +
+                getGioiTinh() + ";" +
+                ngayCong + ";" +
+                luongCoBan + ";" +
+                ngayVaoLam + ";" +
+                trangThai;
     }
+
+    public void fromString(String[] data) {
+        this.maNhanVien = data[1];
+        this.setHoTen(data[2]);
+        this.setNgaySinh(LocalDate.parse(data[3]));
+        this.soCCCD = data[4];
+        this.setSdt(data[5]);
+        this.setEmail(data[6]);
+        this.setGioiTinh(data[7]);
+        this.ngayCong = Double.parseDouble(data[8]);
+        this.luongCoBan = Float.parseFloat(data[9]);
+        this.ngayVaoLam = LocalDate.parse(data[10]);
+        this.trangThai = Boolean.parseBoolean(data[11]);
+        this.chucVu = data[0];
+    }
+
     public abstract double tinhLuong();
     public abstract String getVaiTro();
 }

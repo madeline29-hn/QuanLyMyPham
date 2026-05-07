@@ -1,4 +1,5 @@
 package QuanLyMyPham;
+import java.time.LocalDate;
 import java.util.Scanner;
 public class Son extends SanPham {
     private String mauSac;
@@ -10,7 +11,9 @@ public class Son extends SanPham {
 
     }
 
-    public Son(String mauSac, String chatSon, float khoiLuong){
+    public Son(String maSP, String tenSanPham, String thuongHieu, String phanLoai, double gia, int soLuong,
+        LocalDate ngaySX, LocalDate ngayHH, String nuocSX, NhaCungCap nhaCungCap, boolean trangThai, String congDung, String mauSac, String chatSon, float khoiLuong){
+        super(maSP, tenSanPham, thuongHieu,phanLoai, gia, soLuong, ngaySX, ngayHH, nuocSX, nhaCungCap, trangThai, congDung);
         this.mauSac = mauSac;
         this.chatSon = chatSon;
         this.khoiLuong = khoiLuong;
@@ -53,8 +56,18 @@ public class Son extends SanPham {
     }
 
     public String thongTinSon(){
-        return "Son [Mau sac: " + mauSac + ", chat son: " + chatSon +", khoi luong: " + khoiLuong + "gram]";
+        return "Son [Mau sac: " + mauSac + ", chat son: " + chatSon +", khoi luong: " + khoiLuong + " gram]";
     }
+
+    public void hienThiKiemTraSon(){
+        System.out.println("\n--- Tong hop thong tin ---");
+        System.out.println(this.toString());
+        System.out.println("Kiem tra chat son: " + (this.ktChatSon() ? "Hop le" : "Khong hop le"));
+        System.out.println("Kiem tra khoi luong son: " + (this.ktKhoiLuong() ? "Hop le" : "Khong hop le"));
+        System.out.println("Kiem tra mau son: " + (this.ktMauSac() ? "Da nhap" : "Chua nhap"));
+        System.out.println("Thong tin chi tiet: " + this.thongTinSon());
+    }
+
 
     public void nhap(){
         super.nhap();

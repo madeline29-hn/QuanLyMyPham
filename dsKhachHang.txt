@@ -1,0 +1,6 @@
+KH00001;Vu Thuy Linh;0911222888;linh.vt@gmail.com;2002-04-30;son bong,co makeup;Dong;300000.0;3000.0
+KH00002;Nguyen Van An;0902111333;an.nv@gmail.com;1990-01-15;duong da body;Bac;700000.0;7000.0
+KH00003;Tran Duc Minh;0944555666;minh.td@gmail.com;1993-09-22;kem duong da mat;Bac;1000000.0;10000.0
+KH00004;Le Dieu Thuy;0989000111;thuy.ld@gmail.com;1988-03-08;son li,duong da body;Vang;2000000.0;20000.0
+KH00005;Phan Thanh Tung;0978222444;tung.pt@gmail.com;1985-12-12;son li,son bong,phan phu bot,phan phu nen,kem duong da mat,co makeup;Vang;2500000.0;25000.0
+KH00006;Hoang Bao Ngoc;0932111000;ngoc.hb@gmail.com;1995-10-20;son bong,son li,phan phu bot;Kim cuong;5000000.0;50000.0

@@ -22,19 +22,19 @@ public class SanPham {
     }
 
     public SanPham(String maSP, String tenSanPham, String thuongHieu, String phanLoai, double gia, int soLuong,
-        LocalDate ngaySX, LocalDate ngayHH, String nuocSX, NhaCungCap nhaCungCap, boolean trangThai, String congDung){
-            this.maSP = maSP;
-            this.tenSanPham = tenSanPham;
-            this.thuongHieu = thuongHieu;
-            this.phanLoai = phanLoai;
-            this.gia = gia;
-            this.soLuong = soLuong;
-            this.ngaySX = ngaySX;
-            this.ngayHH = ngayHH;
-            this.nuocSX = nuocSX;
-            this.nhaCungCap = nhaCungCap; 
-            this.trangThai = trangThai;
-            this.congDung = congDung;
+                   LocalDate ngaySX, LocalDate ngayHH, String nuocSX, NhaCungCap nhaCungCap, boolean trangThai, String congDung){
+        this.maSP = maSP;
+        this.tenSanPham = tenSanPham;
+        this.thuongHieu = thuongHieu;
+        this.phanLoai = phanLoai;
+        this.gia = gia;
+        this.soLuong = soLuong;
+        this.ngaySX = ngaySX;
+        this.ngayHH = ngayHH;
+        this.nuocSX = nuocSX;
+        this.nhaCungCap = nhaCungCap;
+        this.trangThai = trangThai;
+        this.congDung = congDung;
     }
 
     public String getMaSP(){
@@ -42,7 +42,6 @@ public class SanPham {
     }
 
     public void setMaSP(String maSP){
-        //thêm ràng buộc (5 số)
         this.maSP = maSP;
     }
 
@@ -83,8 +82,9 @@ public class SanPham {
     }
 
     public void setSoLuong(int soLuong){
-        this.soLuong = soLuong;
-        
+        if (soLuong >= 0){
+            this.soLuong = soLuong;
+        }
     }
 
     public LocalDate getNgaySX(){
@@ -119,7 +119,7 @@ public class SanPham {
         this.nhaCungCap = nhaCungCap;
     }
 
-    public boolean isTrangThai(){
+    public boolean getTrangThai(){
         return trangThai;
     }
 
@@ -135,7 +135,14 @@ public class SanPham {
         this.congDung = congDung;
     }
 
+    public String getLoai(){
+        return "SanPham";
+    }
+
+
     public boolean ktHetHan(LocalDate currentDate){
+        if(this.ngayHH == null)
+            return false;
         return ngayHH.isBefore(currentDate);
     }
 
@@ -144,56 +151,87 @@ public class SanPham {
             this.gia = this.gia * (1 - phanTram/100.0);
         }
     }
-
-    public void soLuongTonKho(int soLuong){
-        if(soLuong >= 0 ){
-            this.soLuong = soLuong;
-            System.out.println("So luong ton kho hien tai: " + this.soLuong);
-        } else {
-            System.out.println("So luong khong the am!");
+    public void nhapHang(int sl){
+        if(sl > 0){
+            this.soLuong += sl;
         }
     }
 
-    public void nhapHang(int slNhap){
-        this.soLuong += slNhap;
-    }
-
-    public void xuatHang(int soLuong){
-        if (soLuong > 0 && soLuong <= this.soLuong){
-            this.soLuong -= soLuong;
-        }else{
-            System.out.println("Khong du hang de xuat!");
+    public boolean xuatHang(int sl){
+        if (sl > 0 && sl <= soLuong){
+            this.soLuong -= sl;
+            return true;
         }
+        return false;
     }
 
-    public double tinhGiaCuoiCung(){
+    public double giaNhapHang(){
         return gia;
     }
 
-    public double tinhTongTien(int soLuongMua){
-        return tinhGiaCuoiCung() * soLuongMua;
+    public double giaNiemYet(){
+        return gia * 1.3;
     }
 
     public boolean ktCongDung(){
         return this.congDung != null && !this.congDung.isEmpty();
     }
 
+    public void hienThiKiemTraCongDung(){
+        if(this.ktCongDung()){
+            System.out.println("Cong dung hop le!");
+        } else {
+            System.out.println("Cong dung khong hop le!");
+        }
+    }
+
+    public void hienThiKiemTraHanDung(){
+        String tinhTrang = this.ktHetHan(LocalDate.now()) ? "Da het han su dung" : "Con han su dung";
+        System.out.println("Kiem tra han dung: " + tinhTrang);
+    }
+
+    public void hienThiBangGia(){
+        System.out.println("======== BANG GIA ========");
+        System.out.printf("Gia nhap vao kho: %,.0f VND\n", this.giaNhapHang());
+        System.out.printf("Gia ban niem yet: %,.0f VND\n", this.giaNiemYet());
+    }
+
     public void nhap(){
-         while (true) {
-            System.out.println("Nhap ma san pham (5 chu so): ");
-            this.maSP = sc.nextLine().trim();
-            if (this.maSP.matches("\\d{5}")) {
-                setMaSP("SP" + this.maSP);
+        while (true){
+            System.out.println("===== CHON SAN PHAM =====");
+            System.out.println("1. Son ");
+            System.out.println("2. Phan phu");
+            System.out.println("3. Kem duong");
+            System.out.println("4. Dung cu");
+            System.out.print("Nhap lua chon (1-4): ");
+            int chon = Integer.parseInt(sc.nextLine());
+            boolean hopLe = true;
+            switch (chon) {
+                case 1:
+                    this.phanLoai = "Son";
+                    break;
+                case 2:
+                    this.phanLoai = "Phan phu";
+                    break;
+                case 3:
+                    this.phanLoai = "Kem duong";
+                    break;
+                case 4:
+                    this.phanLoai = "Dung cu";
+                    break;
+                default:
+                    System.out.println("Lua chon khong hop le!");
+                    hopLe = false;
+            }
+            if(hopLe){
                 break;
-            } else {
-                System.out.println("Ma san pham phai co dung 5 chu so, vui long nhap lai!");
             }
         }
 
         while (true) {
-            System.out.println("Nhap ten san pham: ");
+            System.out.print("Nhap ten san pham: ");
             String tenSanPhamInput = sc.nextLine().trim();
-            if (tenSanPhamInput.matches("^[^0-9]+$")) { // không chứa số
+            if (tenSanPhamInput.matches("^[^0-9]+$")) {
                 setTenSanPham(tenSanPhamInput);
                 break;
             } else {
@@ -202,60 +240,47 @@ public class SanPham {
         }
 
         while (true){
-            System.out.println("Nhap ten thuong hieu: ");
+            System.out.print("Nhap ten thuong hieu: ");
             String thuongHieuInput = sc.nextLine().trim();
             if(thuongHieuInput.matches("[^0-9]+$")){
                 setThuongHieu(thuongHieuInput);
                 break;
             }else {
-                System.out.println("Ten thuong hieu khong duoc chua so, vui long nhap lai!");
+                System.out.println("Ten thuong hieu khong hop le, vui long nhap lai!");
             }
         }
-        System.out.println("Nhap phan loai: ");
-        setPhanLoai(sc.nextLine());
+
+
         while (true){
-            System.out.println("Nhap gia niem yet: ");
+            System.out.print("Nhap gia nhap hang: ");
             if(sc.hasNextDouble()){
-                double gia = sc.nextDouble();
+                this.gia = Double.parseDouble(sc.nextLine());
                 if(gia > 1000){
                     setGia(gia);
-                    sc.nextLine();
                     break;
                 }else{
                     System.out.println("Gia phai > 1000");
                 }
             }else{
                 System.out.println("Gia phai la so");
-                sc.next();
             }
         }
 
-        while (true){
-            System.out.println("Nhap so luong trong kho: ");
-            if (sc.hasNextInt()){
-                int soLuong = sc.nextInt();
-                if( soLuong >=0){
-                    setSoLuong(soLuong);
-                    sc.nextLine();
-                    break;
-                }else{
-                    System.out.println("So luong >= 0");
-                }
-            }else{
-                System.out.println("So luong phai la so.");
-                sc.next();
-            }
-        }
-        
         LocalDate ngayNhap = LocalDate.now();
         while (true) {
             try {
-                System.out.println("Nhap ngay san xuat (yyyy-mm-dd): ");
+                System.out.print("Nhap ngay san xuat (yyyy-mm-dd): ");
                 LocalDate nsx = LocalDate.parse(sc.nextLine().trim());
                 if(nsx.isAfter(ngayNhap)){
                     System.out.println("Loi: Ngay san xuat phai truoc hoac bang ngay nhap kho!");
                     continue;
                 }
+
+                if(nsx.getYear() < 2023){
+                    System.out.println("Loi: Nam san xuat phai tu 2023 tro ve sau!");
+                    continue;
+                }
+
                 setNgaySX(nsx);
                 break;
             } catch (Exception e) {
@@ -263,35 +288,32 @@ public class SanPham {
             }
         }
 
-        while (true) {
-            try {
-                System.out.println("Nhap ngay het han (yyyy-mm-dd): ");
-                LocalDate nhh = LocalDate.parse(sc.nextLine().trim());
-                if (nhh.isAfter(this.ngaySX)){
-                setNgayHH(nhh);
+        LocalDate nhh = ngaySX.plusYears(3);
+        setNgayHH(nhh);
+
+        String nuocsxInput;
+        while (true){
+            System.out.print("Nhap nuoc san xuat: ");
+            nuocsxInput = sc.nextLine().trim();
+            if(!nuocsxInput.isEmpty() && nuocsxInput.matches("^[^0-9]+$")){
+                setNuocSX(nuocsxInput);
                 break;
-                }else{
-                    System.out.println("Loi: Ngay het han phai sau ngay san xuat (" + this.ngaySX + ")!");
-                }
-            } catch (Exception e) {
-                System.out.println("Ngay het han khong hop le, vui long nhap lai!");
+            } else {
+                System.out.println("Nuoc san xuat khong de trong, vui long nhap lai!");
             }
         }
-
-        System.out.println("Nhap nuoc san xuat: ");
-        setNuocSX(sc.nextLine());
 
         NhaCungCap nhaCungCap = new NhaCungCap();
         nhaCungCap.nhap();
         setNhaCungCap(nhaCungCap);
 
-        System.out.println("1. Dang luu hanh / 0. Da het hang ");
+        System.out.print("1. Dang luu hanh / 0. Khong con luu hanh: ");
         int temp = sc.nextInt();
         sc.nextLine();
         this.trangThai = (temp == 1);
 
         while(true){
-            System.out.println("Nhap cong dung: ");
+            System.out.print("Nhap cong dung: ");
             this.congDung = sc.nextLine().trim();
             if(ktCongDung()){
                 break;
@@ -300,13 +322,36 @@ public class SanPham {
             }
         }
     }
+
+    public String outputFile() {
+        String maNCC = (nhaCungCap != null) ? nhaCungCap.getMaNCC() : "null";
+        String tenNCC = (nhaCungCap != null) ? nhaCungCap.getTenNCC() : "null";
+        String diaChiNCC = (nhaCungCap != null) ? nhaCungCap.getDiaChi() : "null";
+        String sdtNCC = (nhaCungCap != null) ? nhaCungCap.getSdt() : "null";
+        String emailNCC = (nhaCungCap != null) ? nhaCungCap.getEmail() : "null";
+        return String.format("%s;%s;%s;%s;%.1f;%s;%s;%s;%s;%s;%s;%s;%s;%b;%s;%d",
+                maSP, phanLoai, tenSanPham, thuongHieu, gia,
+                maNCC, tenNCC, diaChiNCC, sdtNCC, emailNCC,
+                ngaySX, ngayHH, nuocSX, trangThai, congDung, soLuong);
+    }
+
     @Override
     public String toString() {
         String sTrangThai = (this.trangThai)? "Dang luu hanh" : "Da het hang";
-        return String.format("|%-10s |%-25s |%-25s |%-15s |%-15.2f |%-5d |%-15s |%-15s |%-15s |%-20s |%-15s |%-15s |", maSP, tenSanPham, thuongHieu, phanLoai, gia, 
-        soLuong, ngaySX, ngayHH, nuocSX, nhaCungCap, sTrangThai, congDung);
+        String maNCC = (nhaCungCap != null) ? nhaCungCap.getMaNCC(): "";
+        String tenNCC = (nhaCungCap != null) ? nhaCungCap.getTenNCC(): "";
+        String diaChi = (nhaCungCap != null) ? nhaCungCap.getDiaChi(): "";
+        String sdt = (nhaCungCap != null) ? nhaCungCap.getSdt(): "";
+        String email = (nhaCungCap != null) ? nhaCungCap.getEmail(): "";
+        String dong1 = String.format("| %-8s | %-15s | %-12s | %-12.1f | %-4d | %-11s | %-11s | %-9s | %-10s | %-12s | %-11s | %-16s |\n",
+                maSP, tenSanPham, thuongHieu, giaNiemYet(), soLuong, ngaySX, ngayHH, maNCC, tenNCC, diaChi, sdt, email);
+        String noiDungDong2 = String.format(" => Trang thai: %-15s | Cong dung: %-32s |", sTrangThai, congDung);
+        String dong2 = String.format("| %-166s |\n", noiDungDong2);
+        String duongKe = "-".repeat(170) + "\n";
+        return dong1 + dong2 + duongKe;
     }
-    public void xuat() { 
+
+    public void xuat() {
         System.out.println(toString());
     }
 }

@@ -75,58 +75,46 @@ public class NhaCungCap {
         System.out.println("Trang thai: Giao dich thanh cong.");
     }
 
-    public void nhap(){
-        while(true){
-            System.out.println("Nhap ma nha cung cap (5 chu so): ");
-            this.maNCC = sc.nextLine().trim();
-            if(this.maNCC.matches("\\d{5}")){
-                setMaNCC("NCC" +this.maNCC );
-                break;
-            }else{
-                System.out.println("Ma nha cung cap chi co dung 5 chu so, vui long nhap lai!");
-            }
-        }
-
-        while(true){
-            System.out.println("Nhap ten nha cung cap: ");
-            this.tenNCC = sc.nextLine().trim();
-            if(this.tenNCC.matches("^[^0-9]+$")){
-                setTenNCC(this.tenNCC);
-                break;
-            }else{
-                System.out.println("Ten nha cung cap khong chua so, vui long nhap lai!");
-            }
-        }
-
-        System.out.println("Nhap dia chi: ");
-        setDiaChi(sc.nextLine());
-
+    public void ktDonVaThanhToan(){
+        String maDH;
         while (true){
-            System.out.println("Nhap so dien thoai: ");
-            this.sdt = sc.nextLine().trim();
-            if(this.sdt.matches("\\d{10}")){
-                setSdt(this.sdt);
+            System.out.println("Nhap ma don hang ban muon kiem tra (DH + 5 chu so): ");
+            maDH = sc.nextLine().trim();
+            if(maDH.matches("\\d{5}")){
+                maDH = ("DH" + maDH);
                 break;
-            }else{
-                System.out.println("So dien thoai chi co dung 10 chu so, vui long nhap lai!");
+            } else {
+                System.out.println("Ma don sai dinh dang, vui long nhap lai!");
             }
         }
+        this.kiemTraDonHang(maDH);
 
-        while(true){
-            System.out.println("Nhap email: ");
-            this.email = sc.nextLine().trim();
-            if(this.email.matches("^[A-Za-z0-9+_.-]+$")){
-                setEmail(this.email + "@gmail.com");
-                break;
-            }else{
-                System.out.println("Email khong hop le, vui long nhap lai!");
-            }
-        }
+        System.out.println(this.toString());
+        this.cungCapHang();
+        this.thanhToan();
+    }
+
+    public void nhap(){
+        this.maNCC = "12345";
+        setMaNCC("NCC" + this.maNCC );
+
+        this.tenNCC = "Unilever";
+        setTenNCC(this.tenNCC);
+
+        this.diaChi = "Ho Chi Minh";
+        setDiaChi(this.diaChi);
+
+        
+        this.sdt = "0912345678";
+        setSdt(this.sdt);
+                
+        this.email = "unilever@gmail.com";
+        setEmail(this.email);
     }
 
     @Override
     public String toString(){
-        return String.format("|%-7s |%-15s |%-30s |%-12s |%-30s |", maNCC, tenNCC, diaChi, sdt, email);
+        return String.format(" %-8s | %-10s | %-12s | %-11s | %-16s ", maNCC, tenNCC, diaChi, sdt, email);
     }
     public void xuat(){
         System.out.println(toString());

@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public abstract class ConNguoi {
-    private String hoTen, sdt, email, gioiTinh; 
+    private String hoTen, sdt, email, gioiTinh;
     private LocalDate ngaySinh;
     static Scanner sc = new Scanner(System.in);
     public abstract String getVaiTro();
@@ -18,7 +18,7 @@ public abstract class ConNguoi {
     }
     public String getHoTen() {
         return hoTen;
-    }       
+    }
     public void setHoTen(String hoTen) {
         this.hoTen = hoTen;
     }
@@ -46,11 +46,11 @@ public abstract class ConNguoi {
     public void setNgaySinh(LocalDate ngaySinh) {
         this.ngaySinh = ngaySinh;
     }
-    public void nhap(){
+    public void nhap(ConNguoi[] ds, int soLuong){
         while (true) {
             System.out.println("Nhap ho ten: ");
             String hoTenInput = sc.nextLine().trim();
-            if (hoTenInput.matches("^[^0-9]+$")) { // không chứa số
+            if (hoTenInput.matches("^[^0-9]+$")) { 
                 setHoTen(hoTenInput);
                 break;
             } else {
@@ -58,30 +58,49 @@ public abstract class ConNguoi {
             }
         }
 
-
         while (true) {
-            System.out.println("Nhap so dien thoai (10 so): ");
+            System.out.print("Nhap so dien thoai (10 so): ");
             String sdtInput = sc.nextLine().trim();
             if (sdtInput.matches("0\\d{9}")) {
-                setSdt(sdtInput);
-                break;
+                boolean trung = false;
+                for (int i = 0; i < soLuong; i++) {
+                    if (ds[i] != null && sdtInput.equals(ds[i].getSdt())) {
+                        trung = true;
+                        break;
+                    }
+                }
+                if (trung) {
+                    System.out.println("Loi: So dien thoai nay da ton tai!");
+                } else {
+                    setSdt(sdtInput);
+                    break;
+                }
             } else {
-                System.out.println("So dien thoai khong hop le, vui long nhap lai!");
+                System.out.println("Loi: SDT phai co 10 so và bat dau bang so 0!");
             }
         }
-
         while (true) {
-            System.out.println("Nhap ten email : ");
+            System.out.print("Nhap ten email (truoc @): ");
             String emailName = sc.nextLine().trim();
             if (!emailName.isEmpty() && !emailName.contains(" ")) {
                 String fullEmail = emailName + "@gmail.com";
-                setEmail(fullEmail);
-                break;
+                boolean trung = false;
+                for (int i = 0; i < soLuong; i++) {
+                    if (ds[i] != null && fullEmail.equalsIgnoreCase(ds[i].getEmail())) {
+                        trung = true;
+                        break;
+                    }
+                }
+                if (trung) {
+                    System.out.println("Loi: Email nay da ton tai!");
+                } else {
+                    setEmail(fullEmail);
+                    break;
+                }
             } else {
-                System.out.println("Ten email khong hop le, vui long nhap lai!");
+                System.out.println("Loi: Ten email khong hop le!");
             }
         }
-
 
         while (true) {
             System.out.println("Nhap gioi tinh (Nam/Nu): ");
@@ -104,7 +123,7 @@ public abstract class ConNguoi {
                 } else {
                     System.out.println("Tuoi phai lon hon hoac bang 18 va nho hon hoac bang 100, vui long nhap lai!");
                 }
-                
+
             } catch (Exception e) {
                 System.out.println("Ngay sinh khong hop le dinh dang (yyyy-mm-dd), vui long nhap lai!");
             }
@@ -115,11 +134,9 @@ public abstract class ConNguoi {
     public String toString() {
         return String.format("|%-20s |%-12s |%-25s |%-5s |%-12s|", hoTen, sdt, email, gioiTinh, ngaySinh);
     }
-    public void xuat() { 
+    public void xuat() {
         System.out.println(toString());
-        //String header = String.format("| %-20s | %-12s | %-25s | %-8s | %-12s |", 
-                   //                 "Ho va Ten", "SDT", "Email", "Gioi Tinh", "Ngay Sinh");
-        
     }
-    
+
 }
+

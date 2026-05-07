@@ -10,15 +10,11 @@ public class KhuyenMai {
     private LocalDate ngayBatDau;
     private LocalDate ngayKetThuc;
     private double phanTramGiam;
-    private int loaiKM; // 1: SP, 2: Hóa đơn
+    private int loaiKM; 
     private double giaTriToiThieu;
     private double giamToiDa;
-    private int soLuongMa;
-    private int soLuotDaDung;
-    private String dieuKienApDung;
     private boolean dangKichHoat;
     private String maSanPhamApDung;
-    private String loaiKhachHangApDung;
     private double tongTienDaGiam;
 
     public static final int KM_SAN_PHAM = 1;
@@ -26,20 +22,14 @@ public class KhuyenMai {
 
     public static Scanner sc = new Scanner(System.in);
 
-    // --- CONSTRUCTOR ---
     public KhuyenMai() {
         this.dangKichHoat = true;
-        this.soLuotDaDung = 0;
         this.tongTienDaGiam = 0;
-        this.loaiKhachHangApDung = "Tat ca";
     }
-
-    public KhuyenMai(String maKM, String tenKM, LocalDate ngayBatDau, LocalDate ngayKetThuc,
-                     double phanTramGiam, int loaiKM, double giaTriToiThieu,
-                     double giamToiDa, int soLuongMa, String dieuKienApDung,
-                     String maSanPhamApDung, String loaiKhachHangApDung) {
-
-        this();
+    
+    public KhuyenMai(String maKM, String tenKM, LocalDate ngayBatDau, LocalDate ngayKetThuc, double phanTramGiam,
+            int loaiKM, double giaTriToiThieu, double giamToiDa, boolean dangKichHoat, String maSanPhamApDung,
+            double tongTienDaGiam) {
         this.maKM = maKM;
         this.tenKM = tenKM;
         this.ngayBatDau = ngayBatDau;
@@ -48,13 +38,12 @@ public class KhuyenMai {
         this.loaiKM = loaiKM;
         this.giaTriToiThieu = giaTriToiThieu;
         this.giamToiDa = giamToiDa;
-        this.soLuongMa = soLuongMa;
-        this.dieuKienApDung = dieuKienApDung;
+        this.dangKichHoat = dangKichHoat;
         this.maSanPhamApDung = maSanPhamApDung;
-        this.loaiKhachHangApDung = loaiKhachHangApDung;
+        this.tongTienDaGiam = tongTienDaGiam;
     }
 
-    // --- GETTERS & SETTERS ---
+
     public String getMaKM() { return maKM; }
     public void setMaKM(String maKM) { this.maKM = maKM; }
 
@@ -106,93 +95,57 @@ public class KhuyenMai {
     public double getGiamToiDa() { return giamToiDa; }
     public void setGiamToiDa(double giamToiDa) { this.giamToiDa = giamToiDa; }
 
-    public int getSoLuongMa() { return soLuongMa; }
-    public void setSoLuongMa(int soLuongMa) { this.soLuongMa = soLuongMa; }
-
-    public int getSoLuotDaDung() { return soLuotDaDung; }
-
-    public String getDieuKienApDung() { return dieuKienApDung; }
-    public void setDieuKienApDung(String dieuKienApDung) { this.dieuKienApDung = dieuKienApDung; }
-
     public boolean isDangKichHoat() { return dangKichHoat; }
     public void setDangKichHoat(boolean dangKichHoat) { this.dangKichHoat = dangKichHoat; }
 
     public String getMaSanPhamApDung() { return maSanPhamApDung; }
     public void setMaSanPhamApDung(String maSanPhamApDung) { this.maSanPhamApDung = maSanPhamApDung; }
 
-    public String getLoaiKhachHangApDung() { return loaiKhachHangApDung; }
-    public void setLoaiKhachHangApDung(String loaiKhachHangApDung) { this.loaiKhachHangApDung = loaiKhachHangApDung; }
-
     public double getTongTienDaGiam() { return tongTienDaGiam; }
+    public void setTongTienDaGiam(double tongTienDaGiam){ this.tongTienDaGiam = tongTienDaGiam; }
 
-    // --------
     public boolean conHieuLuc(LocalDate ngayMua) {
         if (!dangKichHoat) return false;
-        if (soLuongMa > 0 && soLuotDaDung >= soLuongMa) return false;
         if (ngayMua == null || ngayBatDau == null || ngayKetThuc == null) return false;
-
         return (!ngayMua.isBefore(ngayBatDau) && !ngayMua.isAfter(ngayKetThuc));
     }
-
+    public double tinhGiaNiemYet(double giaTri) {
+        return giaTri;
+    }
     public double tinhGiamGiaDuKien(double giaTri, LocalDate ngayMua, String loaiKH, String maSP) {
-        if (!conHieuLuc(ngayMua)) return 0;
-    
-    // Kiểm tra điều kiện loại khách hàng áp dụng
-        if (loaiKhachHangApDung != null && !loaiKhachHangApDung.equalsIgnoreCase("Tat ca")) {
-            if (loaiKH == null) return 0;
-        
-        //  kiểm tra hạng Vàng/Kim Cương
-            if (!(loaiKH.equalsIgnoreCase("Vang") || loaiKH.equalsIgnoreCase("Kim cuong"))) {
-                return 0;
-            }     
-        // Nếu yêu cầu hạng cụ thể (ví dụ: "Bac"), phải khớp chính xác
-            else if (!loaiKhachHangApDung.equalsIgnoreCase(loaiKH.trim())) {
-            return 0;
-            }
-        }
-
+        if (!dangKichHoat) return 0;
+        if (ngayMua == null || ngayBatDau == null || ngayKetThuc == null) return 0;
+        if (ngayMua.isBefore(ngayBatDau) || ngayMua.isAfter(ngayKetThuc)) return 0;
+        if (giaTri < giaTriToiThieu) return 0;
         double tienGiam = 0;
+        String hang = (loaiKH != null) ? loaiKH.trim().toLowerCase().replace(" ", "") : "";
         if (loaiKM == KM_HOA_DON) {
-            if (giaTri < giaTriToiThieu) return 0;
-            tienGiam = giaTri * (phanTramGiam / 100);
+            if (!(hang.equals("vang") || hang.equals("kimcuong"))) return 0;
+            tienGiam = giaTri * (phanTramGiam / 100.0);
         } else if (loaiKM == KM_SAN_PHAM) {
-            if (maSanPhamApDung == null || !maSanPhamApDung.equalsIgnoreCase(maSP)) return 0;
-            tienGiam = giaTri * (phanTramGiam / 100);
+            if (maSanPhamApDung == null || maSP == null) return 0;
+            String maGoc = maSanPhamApDung.replaceAll("\\s+", ""); 
+            String maCheck = maSP.replaceAll("\\s+", "");
+            if (!maGoc.equalsIgnoreCase(maCheck)) return 0;
+            tienGiam = giaTri * (phanTramGiam / 100.0);
         }
-
         if (giamToiDa > 0 && tienGiam > giamToiDa) tienGiam = giamToiDa;
         return Math.max(tienGiam, 0);
     }
-
+    
     public double tinhTienSauGiam(double giaTri, LocalDate ngayMua, String loaiKH, String maSP) {
         double giam = tinhGiamGiaDuKien(giaTri, ngayMua, loaiKH, maSP);
+        
         return giaTri - giam;
     }
 
     public boolean xacNhanSuDung(double tienGiam, LocalDate ngayMua, String loaiKH, String maSP) {
         if (!dangKichHoat) return false;
         if (!conHieuLuc(ngayMua)) return false;
-
-        if (soLuongMa > 0 && soLuotDaDung >= soLuongMa) return false;
-
-        this.soLuotDaDung++;
         this.tongTienDaGiam += tienGiam;
-
         return true;
     }
 
-    public void hoanTacSuDung(double tienGiam) {
-        if (soLuotDaDung > 0) {
-            this.soLuotDaDung--;
-            this.tongTienDaGiam -= tienGiam;
-            if (this.tongTienDaGiam < 0) this.tongTienDaGiam = 0;
-        }
-    }
-    public double tinhGiaNiemYet(double giaTri) {
-        return giaTri;
-    }
-
-    // --- NHẬP ---
     public void nhap() {
         System.out.println("--- NHAP KHUYEN MAI ---");
 
@@ -270,21 +223,12 @@ public class KhuyenMai {
         System.out.print("Giam toi da: ");
         giamToiDa = Double.parseDouble(sc.nextLine());
 
-        System.out.print("So luong ma: ");
-        soLuongMa = Integer.parseInt(sc.nextLine());
-
         if (loaiKM == KM_SAN_PHAM) {
             System.out.print("Ma SP ap dung: ");
             maSanPhamApDung = sc.nextLine();
         } else {
             maSanPhamApDung = null;
         }
-
-        System.out.print("Loai KH ap dung: ");
-        loaiKhachHangApDung = sc.nextLine();
-
-        System.out.print("Dieu kien: ");
-        dieuKienApDung = sc.nextLine();
     }
 
     public void xuat() {
@@ -296,13 +240,12 @@ public class KhuyenMai {
         String loai = (loaiKM == KM_SAN_PHAM) ? "SP" : "HD";
         String status = dangKichHoat ? "Mo" : "Khoa";
 
-        return String.format("|%-7s|%-15s|%2.0f%%|%s|%s->%s|Con:%d/%d|Max:%,.0f|KH:%s|%s|",
-                maKM, tenKM, phanTramGiam, loai,
-                ngayBatDau, ngayKetThuc,
-                (soLuongMa - soLuotDaDung), soLuongMa,
-                giamToiDa,
-                loaiKhachHangApDung,
-                status
+        return String.format("|%-7s|%-15s|%2.0f%%|%s|%s->%s|Max:%,.0f|%s|",
+        maKM, tenKM, phanTramGiam, loai,
+        ngayBatDau, ngayKetThuc,
+        giamToiDa,
+        status
         );
     }
 }
+

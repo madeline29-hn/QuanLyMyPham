@@ -1,6 +1,6 @@
 package QuanLyMyPham;
 
 public interface iDocGhiFile {
-    void read();
-    void write();
+    public void read();
+    public void write();
 }

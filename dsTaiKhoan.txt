@@ -1,0 +1,11 @@
+NV00001,ngoc01,Quan Ly
+NV00002,thao02,Thu Ngan
+NV00003,phuong03,Thu Ngan
+NV00004,bao04,Thu Ngan
+NV00005,duyen05,CSKH
+NV00006,dat06,CSKH
+NV00007,thu07,CSKH
+KH00001,linh01,Khach Hang
+KH00002,an02,Khach Hang
+KH00003,minh03,Khach Hang
+NV00009,antoan09,Thu Ngan

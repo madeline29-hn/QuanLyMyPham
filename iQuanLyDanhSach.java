@@ -1,13 +1,13 @@
 package QuanLyMyPham;
 
 public interface iQuanLyDanhSach {
-    void themVaoDanhSach(); 
-    void xoaKhoiDanhSach(); 
-    void suaDanhSach();
-    void timKiemChinhXac();
-    void timKiemTuongDoi();  
-    void thongKeTheoKhoa();
-    void nhapDanhSach(); 
-    void xuatDanhSach();
+    public void themVaoDanhSach();
+    public void xoaKhoiDanhSach(String ma); 
+    public void suaDanhSach(String ma);
+    public void timKiemChinhXac(String ma);
+    public void timKiemTuongDoi(String tuKhoa);  
+    public void thongKeTheoKhoa();
+    public void nhapDanhSach(); 
+    public void xuatDanhSach();
     
 }
