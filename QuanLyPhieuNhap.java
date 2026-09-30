@@ -130,7 +130,6 @@ public class QuanLyPhieuNhap implements iQuanLyDanhSach,iDocGhiFile {
                 tongTienNhap += dsPhieuNhap[i].tongTien();
             }
         }
-
         return tongTienNhap;
     }
     public void thongKeTheoKhoa() {

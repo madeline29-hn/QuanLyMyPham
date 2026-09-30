@@ -249,7 +249,6 @@ public class QuanLyTaiKhoan implements iDocGhiFile, iQuanLyDanhSach {
     public void menu(QuanLySanPham qlsp, QuanLyNhanVien qlnv, QuanLyKhachHang qlkh,
                      QuanLyHoaDon qlhd, QuanLyPhieuNhap qlpn, QuanLyKM qlkm) {
         int chon;
-        TaiKhoan tk = new TaiKhoan();
         do {
             System.out.println("\n================ QUAN LY DANH SACH TAI KHOAN ================");
             System.out.println("1. Nhap danh sach tai khoan moi");
