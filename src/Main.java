@@ -1,6 +1,14 @@
-    package QuanLyMyPham;
+package QuanLyMyPham;
+import model.*;
+import manager.*;
+import java.util.Scanner;
+import model.HoaDon;
+import model.PhieuNhap;
+import manager.QuanLyHoaDon;
+import manager.QuanLyPhieuNhap;
+import manager.QuanLyKM;
+import manager.QuanLyTaiKhoan;
 
-    import java.util.Scanner;
 
     public class Main {
         public static void main(String[] args) {

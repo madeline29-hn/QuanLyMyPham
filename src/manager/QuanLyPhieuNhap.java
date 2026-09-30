@@ -1,4 +1,7 @@
-package QuanLyMyPham;
+package manager;
+import model.*;
+import model.iDocGhiFile;     
+import model.iQuanLyDanhSach;  
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

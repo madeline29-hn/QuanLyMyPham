@@ -1,4 +1,5 @@
-package QuanLyMyPham;
+package model;
+import manager.*;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -85,17 +86,23 @@ public class PhieuNhap {
         this.tongTien = tongTien;
     }
     public void themSanPham(SanPham sp) {
-        for (int i = 0; i < dsSanPham.length; i++) {
-            if (dsSanPham[i] != null && dsSanPham[i].getMaSP().equals(sp.getMaSP())) {
+        if (sp == null) {
+            return;
+        }
+
+        for (int i = 0; i < soLuongSP; i++) {
+            if (dsSanPham[i] != null && dsSanPham[i].getMaSP().equalsIgnoreCase(sp.getMaSP())) {
                 dsSanPham[i].setSoLuong(dsSanPham[i].getSoLuong() + sp.getSoLuong());
                 return;
             }
         }
+
         if (soLuongSP >= dsSanPham.length) {
             dsSanPham = Arrays.copyOf(dsSanPham, dsSanPham.length + 5);
         }
+
         dsSanPham[soLuongSP] = sp;
-        soLuongSP ++;
+        soLuongSP++;
     }
     public SanPham timKiemSP(String maSP) {
         for (SanPham sp : dsSanPham) {

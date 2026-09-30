@@ -1,4 +1,5 @@
-package QuanLyMyPham;
+package model;
+import manager.*;
 
 import java.nio.channels.Pipe.SourceChannel;
 

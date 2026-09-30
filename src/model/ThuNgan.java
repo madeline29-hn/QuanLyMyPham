@@ -1,37 +1,29 @@
-package QuanLyMyPham;
+package model;
+import manager.*;
 import java.time.LocalDate;
-public class NhanVienCSKH extends NhanVien {
-    private double diemDanhGia;
+
+public class ThuNgan extends NhanVien {
+    private String maQuay;
     private int caLam;
 
-    public NhanVienCSKH() {
+    public ThuNgan() {
         super();
         this.setLuongCoBan(300000);
         this.setNgayCong(0);
     }
 
-    public NhanVienCSKH(String hoTen, String sdt, String email, String gioiTinh, LocalDate ngaySinh,
-                        String maNhanVien, String soCCCD, double ngayCong, float luongCoBan, double diemDanhGia, int caLam) {
+    public ThuNgan(String hoTen, String sdt, String email, String gioiTinh, LocalDate ngaySinh,
+                   String maNhanVien, String soCCCD, double ngayCong, float luongCoBan, String maQuay, int caLam) {
         super(hoTen, sdt, email, gioiTinh, ngaySinh, maNhanVien, soCCCD, ngayCong, luongCoBan);
-        this.diemDanhGia = diemDanhGia;
+        this.maQuay = maQuay;
         this.caLam = caLam;
     }
 
-    public double getDiemDanhGia() {
-        return diemDanhGia;
-    }
+    public String getMaQuay() { return maQuay; }
+    public void setMaQuay(String maQuay) { this.maQuay = maQuay; }
 
-    public void setDiemDanhGia(double diemDanhGia) {
-        this.diemDanhGia = diemDanhGia;
-    }
-
-    public int getCaLam() {
-        return caLam;
-    }
-
-    public void setCaLam(int caLam) {
-        this.caLam = caLam;
-    }
+    public int getCaLam() { return caLam; }
+    public void setCaLam(int caLam) { this.caLam = caLam; }
 
     @Override
     public double tinhLuong() {
@@ -40,20 +32,21 @@ public class NhanVienCSKH extends NhanVien {
 
     @Override
     public String getVaiTro() {
-        return "CSKH";
+        return "Thu Ngan";
     }
 
     @Override
     public void nhap(NhanVien[] ds, int soLuong) {
         super.nhap(ds, soLuong);
+
         while (true) {
-            try {
-                System.out.print("Nhap diem danh gia (0-5): ");
-                this.diemDanhGia = Double.parseDouble(sc.nextLine());
-                if (this.diemDanhGia >= 0 && this.diemDanhGia <= 5) break;
-                System.out.println("Loi: Diem phai tu 0 den 5!");
-            } catch (Exception e) {
-                System.out.println("Loi: Vui long nhap dung dinh dang so!");
+            System.out.print("Nhap ma quay (chon 1-4): ");
+            String input = sc.nextLine().trim();
+            if (input.matches("[1-4]")) {
+                this.maQuay = "MQ" + input;
+                break;
+            } else {
+                System.out.println("Loi: Ma quay chi duoc phep chon tu 1 den 4");
             }
         }
 
@@ -75,8 +68,8 @@ public class NhanVienCSKH extends NhanVien {
 
     @Override
     public String toString() {
-        return super.toString() + String.format(" %-9.1f | %-8s |",
-                this.diemDanhGia,
+        return super.toString() + String.format(" %-8s | %-8s |",
+                maQuay,
                 (caLam == 1 ? "Sang" : "Chieu")
         );
     }
@@ -88,13 +81,13 @@ public class NhanVienCSKH extends NhanVien {
 
     @Override
     public String toDataString() {
-        return super.toDataString() + ";" + diemDanhGia + ";" + caLam;
+        return super.toDataString() + ";" + maQuay + ";" + caLam;
     }
 
     @Override
     public void fromString(String[] data) {
         super.fromString(data);
-        this.diemDanhGia = Double.parseDouble(data[12]);
+        this.maQuay = data[12];
         this.caLam = Integer.parseInt(data[13]);
     }
 }
