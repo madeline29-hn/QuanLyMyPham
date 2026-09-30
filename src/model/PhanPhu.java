@@ -102,7 +102,7 @@ public class PhanPhu extends SanPham {
         }
     }
 
-    @Override
+    
     public String toString(){
         return super.toString()+ String.format("|%-12s |%-5.2f |%-7s |", loaiDa, khoiLuong, mauSac);
     }

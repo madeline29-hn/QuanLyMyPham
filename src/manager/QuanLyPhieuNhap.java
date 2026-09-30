@@ -1,7 +1,8 @@
 package manager;
 import model.*;
-import model.iDocGhiFile;     
-import model.iQuanLyDanhSach;  
+import QuanLyMyPham.iDocGhiFile;
+import QuanLyMyPham.iQuanLyDanhSach;
+
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -230,7 +231,7 @@ public class QuanLyPhieuNhap implements iQuanLyDanhSach,iDocGhiFile {
             }
         }
     }
-    @Override
+    
     public void nhapDanhSach() {
         nhapDanhSach(this.nhanVienDangNhap);
     }
@@ -243,9 +244,10 @@ public class QuanLyPhieuNhap implements iQuanLyDanhSach,iDocGhiFile {
     }
 
     public void read() {
-
+        java.io.File testPath = new java.io.File("dsPhieuNhap.txt"); 
+        System.out.println(">>> ĐƯỜNG DẪN JAVA ĐANG TÌM: " + testPath.getAbsolutePath());
         try {
-            FileReader fr = new FileReader("D:\\Java\\QuanLyMyPham\\dsPhieuNhap.txt");
+            FileReader fr = new FileReader("D:\\Java\\QuanLyMyPham\\Danh Sach file\\dsPhieuNhap.txt");
             BufferedReader br = new BufferedReader(fr);
             String line;
             soLuongPN = 0;

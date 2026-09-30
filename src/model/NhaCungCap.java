@@ -109,11 +109,11 @@ public class NhaCungCap {
         this.sdt = "0912345678";
         setSdt(this.sdt);
                 
-        this.email = "unilever@gmail.com";
+        this.email = "unilevergmail.com";
         setEmail(this.email);
     }
 
-    @Override
+    
     public String toString(){
         return String.format(" %-8s | %-10s | %-12s | %-11s | %-16s ", maNCC, tenNCC, diaChi, sdt, email);
     }

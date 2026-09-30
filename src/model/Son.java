@@ -103,7 +103,7 @@ public class Son extends SanPham {
         }
     }
 
-    @Override
+    
     public String toString(){
         return super.toString() + String.format("|%-10s |%-7s |%-5.2f |", mauSac, chatSon, khoiLuong);
     }

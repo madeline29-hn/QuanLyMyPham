@@ -25,17 +25,17 @@ public class ThuNgan extends NhanVien {
     public int getCaLam() { return caLam; }
     public void setCaLam(int caLam) { this.caLam = caLam; }
 
-    @Override
+    
     public double tinhLuong() {
         return (double) (getLuongCoBan() * getNgayCong());
     }
 
-    @Override
+    
     public String getVaiTro() {
         return "Thu Ngan";
     }
 
-    @Override
+    
     public void nhap(NhanVien[] ds, int soLuong) {
         super.nhap(ds, soLuong);
 
@@ -66,7 +66,7 @@ public class ThuNgan extends NhanVien {
         }
     }
 
-    @Override
+    
     public String toString() {
         return super.toString() + String.format(" %-8s | %-8s |",
                 maQuay,
@@ -74,17 +74,17 @@ public class ThuNgan extends NhanVien {
         );
     }
 
-    @Override
+    
     public void xuat() {
         System.out.println(this.toString());
     }
 
-    @Override
+    
     public String toDataString() {
         return super.toDataString() + ";" + maQuay + ";" + caLam;
     }
 
-    @Override
+    
     public void fromString(String[] data) {
         super.fromString(data);
         this.maQuay = data[12];

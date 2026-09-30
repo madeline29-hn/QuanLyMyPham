@@ -34,17 +34,17 @@ public class NhanVienCSKH extends NhanVien {
         this.caLam = caLam;
     }
 
-    @Override
+    
     public double tinhLuong() {
         return (double) (getLuongCoBan() * getNgayCong());
     }
 
-    @Override
+    
     public String getVaiTro() {
         return "CSKH";
     }
 
-    @Override
+    
     public void nhap(NhanVien[] ds, int soLuong) {
         super.nhap(ds, soLuong);
         while (true) {
@@ -74,7 +74,7 @@ public class NhanVienCSKH extends NhanVien {
         }
     }
 
-    @Override
+    
     public String toString() {
         return super.toString() + String.format(" %-9.1f | %-8s |",
                 this.diemDanhGia,
@@ -82,17 +82,17 @@ public class NhanVienCSKH extends NhanVien {
         );
     }
 
-    @Override
+    
     public void xuat() {
         System.out.println(this.toString());
     }
 
-    @Override
+    
     public String toDataString() {
         return super.toDataString() + ";" + diemDanhGia + ";" + caLam;
     }
 
-    @Override
+    
     public void fromString(String[] data) {
         super.fromString(data);
         this.diemDanhGia = Double.parseDouble(data[12]);

@@ -2,16 +2,12 @@ package QuanLyMyPham;
 import model.*;
 import manager.*;
 import java.util.Scanner;
-import model.HoaDon;
-import model.PhieuNhap;
-import manager.QuanLyHoaDon;
-import manager.QuanLyPhieuNhap;
-import manager.QuanLyKM;
-import manager.QuanLyTaiKhoan;
 
 
     public class Main {
         public static void main(String[] args) {
+            java.io.File testPath = new java.io.File("nhanvien.txt"); 
+            System.out.println(">>> ĐƯỜNG DẪN JAVA ĐANG TÌM: " + testPath.getAbsolutePath());
             Scanner sc = new Scanner(System.in);
 
             QuanLyNhanVien qlnv = new QuanLyNhanVien();

@@ -140,7 +140,7 @@ public class TaiKhoan {
         }
     }
 
-    @Override
+    
     public String toString() {
         String result = "\n--------------------------------------------\n";
         result += String.format("|%-13s|%-15s|%-12s|", "TEN DANG NHAP", "MAT KHAU", "VAI TRO");

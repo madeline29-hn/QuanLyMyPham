@@ -1,7 +1,7 @@
 package manager;
 import model.*;
-import model.iDocGhiFile;     
-import model.iQuanLyDanhSach;  
+import QuanLyMyPham.iDocGhiFile;
+import QuanLyMyPham.iQuanLyDanhSach;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -41,7 +41,7 @@ public class QuanLyKM implements iQuanLyDanhSach, iDocGhiFile{
         }
         return null;
     }
-    @Override
+    
     public void nhapDanhSach(){
         System.out.println("Nhap so luong khuyen mai: ");
         int m = Integer.parseInt(sc.nextLine());
@@ -66,7 +66,7 @@ public class QuanLyKM implements iQuanLyDanhSach, iDocGhiFile{
         return false;
     }
 
-    @Override
+    
     public void themVaoDanhSach(){
         System.out.println("-------- THEM KHUYEN MAI MOI --------");
         int m = 0;
@@ -108,7 +108,7 @@ public class QuanLyKM implements iQuanLyDanhSach, iDocGhiFile{
     }
 
 
-    @Override
+    
     public void suaDanhSach(String ma){
         for (int i = 0; i < soLuongKM; i++){
             if(dsKhuyenMai[i].getMaKM().equalsIgnoreCase(ma)){
@@ -213,7 +213,7 @@ public class QuanLyKM implements iQuanLyDanhSach, iDocGhiFile{
         System.out.println("Khong tim thay!");
     }
 
-    @Override
+    
     public void xoaKhoiDanhSach(String ma){
         for(int i = 0; i < soLuongKM; i++){
             if(dsKhuyenMai[i].getMaKM().equalsIgnoreCase(ma)){
@@ -229,7 +229,7 @@ public class QuanLyKM implements iQuanLyDanhSach, iDocGhiFile{
         System.out.println("Khong tim thay!");
     }
 
-    @Override
+    
     public void timKiemChinhXac(String ma){
         for(int i = 0; i < soLuongKM; i++){
             if(dsKhuyenMai[i].getMaKM().equalsIgnoreCase(ma)){
@@ -240,7 +240,7 @@ public class QuanLyKM implements iQuanLyDanhSach, iDocGhiFile{
         System.out.println("Khong tim thay!");
     }
 
-    @Override
+    
     public void timKiemTuongDoi(String tuKhoa){
         boolean found = false;
         for(int i = 0; i < soLuongKM; i++){
@@ -252,7 +252,7 @@ public class QuanLyKM implements iQuanLyDanhSach, iDocGhiFile{
         if (!found) System.out.println("Khong tim thay!");
     }
 
-    @Override
+    
     public void thongKeTheoKhoa(){
         System.out.println("====== THONG KE KGUYEN MAI ======");
         LocalDate now = LocalDate.now();
@@ -277,7 +277,7 @@ public class QuanLyKM implements iQuanLyDanhSach, iDocGhiFile{
         System.out.println("Trong do: " + conHan + " dang co hieu luc, " + (totalFound - conHan) + " da het han.");
     }
 
-    @Override
+    
     public void write(){
         try{
             BufferedWriter bw = new BufferedWriter(new FileWriter("D:\\Java\\QuanLyMyPham\\dsKhuyenMai.txt"));
@@ -305,10 +305,12 @@ public class QuanLyKM implements iQuanLyDanhSach, iDocGhiFile{
         }
     }
 
-    @Override
+    
     public void read(){
+        java.io.File testPath = new java.io.File("dsKhuyenMai.txt"); 
+        System.out.println(">>> ĐƯỜNG DẪN JAVA ĐANG TÌM: " + testPath.getAbsolutePath());
         try{
-            BufferedReader br = new BufferedReader(new FileReader("D:\\Java\\QuanLyMyPham\\dsKhuyenMai.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("D:\\Java\\QuanLyMyPham\\Danh Sach file\\dsKhuyenMai.txt"));
             String line;
             soLuongKM = 0;
             while ((line = br.readLine()) != null){
@@ -348,7 +350,7 @@ public class QuanLyKM implements iQuanLyDanhSach, iDocGhiFile{
             }
     }
 
-    @Override
+    
     public void xuatDanhSach(){
         if(soLuongKM == 0){
             System.out.println("Danh sach rong!");

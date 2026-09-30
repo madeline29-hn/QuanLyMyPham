@@ -235,7 +235,7 @@ public class KhuyenMai {
         System.out.println(this);
     }
 
-    @Override
+    
     public String toString() {
         String loai = (loaiKM == KM_SAN_PHAM) ? "SP" : "HD";
         String status = dangKichHoat ? "Mo" : "Khoa";

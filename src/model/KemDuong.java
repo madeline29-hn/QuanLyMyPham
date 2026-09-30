@@ -102,7 +102,7 @@ public class KemDuong extends SanPham{
             }
         }
     }
-    @Override
+    
     public String toString(){
         return super.toString() + String.format("|%-12s |%-12s |%-5.2f |", loaiDa, chatKem, khoiLuong);
     } 

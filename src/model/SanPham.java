@@ -336,7 +336,7 @@ public class SanPham {
                 ngaySX, ngayHH, nuocSX, trangThai, congDung, soLuong);
     }
 
-    @Override
+    
     public String toString() {
         String sTrangThai = (this.trangThai)? "Dang luu hanh" : "Da het hang";
         String maNCC = (nhaCungCap != null) ? nhaCungCap.getMaNCC(): "";

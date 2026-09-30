@@ -109,7 +109,7 @@ public class KhachHang extends ConNguoi {
 
         capNhatHang();
     }
-    @Override
+    
     public String toString() {
         String ngaySinhStr = (super.getNgaySinh() != null) ? super.getNgaySinh().toString() : "N/A";
         return String.format(

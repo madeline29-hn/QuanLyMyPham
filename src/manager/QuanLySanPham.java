@@ -1,7 +1,8 @@
 package manager;
 import model.*;
-import model.iDocGhiFile;     
-import model.iQuanLyDanhSach;  
+import QuanLyMyPham.iDocGhiFile;
+import QuanLyMyPham.iQuanLyDanhSach;
+ 
 import java.util.Arrays;
 import java.util.Scanner;
 import java.io.*;
@@ -46,7 +47,7 @@ public class QuanLySanPham implements iQuanLyDanhSach, iDocGhiFile {
         this.soLuongSP = soLuongSP;
     }
 
-    @Override
+    
     public void nhapDanhSach(){
         int m = 0;
         while(true){
@@ -78,7 +79,7 @@ public class QuanLySanPham implements iQuanLyDanhSach, iDocGhiFile {
         return false;
     }
 
-    @Override
+    
     public void themVaoDanhSach(){
         System.out.println("-------- THEM SAN PHAM MOI --------");
         int m = 0;
@@ -120,7 +121,7 @@ public class QuanLySanPham implements iQuanLyDanhSach, iDocGhiFile {
         }
     }
 
-    @Override
+    
     public void xoaKhoiDanhSach(String ma){
         for (int i = 0; i < soLuongSP; i++){
             if(dsSanPham[i].getMaSP().equalsIgnoreCase(ma)){
@@ -134,7 +135,7 @@ public class QuanLySanPham implements iQuanLyDanhSach, iDocGhiFile {
         }
     }
 
-    @Override
+    
     public void suaDanhSach(String ma){
         for (int i = 0; i < soLuongSP; i++){
             if(dsSanPham[i].getMaSP().equalsIgnoreCase(ma)){
@@ -262,7 +263,7 @@ public class QuanLySanPham implements iQuanLyDanhSach, iDocGhiFile {
         System.out.println("Khong tim thay!");
     }
 
-    @Override
+    
     public void timKiemChinhXac(String ma){
         for (int i = 0; i < soLuongSP; i++){
             if(dsSanPham[i].getMaSP().equalsIgnoreCase(ma)){
@@ -273,7 +274,7 @@ public class QuanLySanPham implements iQuanLyDanhSach, iDocGhiFile {
         System.out.println("Khong tim thay!");
     }
 
-    @Override
+    
     public void timKiemTuongDoi(String tuKhoa){
         boolean found = false;
         for(int i = 0; i < soLuongSP; i++){
@@ -287,7 +288,7 @@ public class QuanLySanPham implements iQuanLyDanhSach, iDocGhiFile {
         }
     }
 
-    @Override
+    
     public void thongKeTheoKhoa(){
         String tuKhoa = sc.nextLine().toLowerCase().trim();
         int tong = 0;
@@ -332,10 +333,12 @@ public class QuanLySanPham implements iQuanLyDanhSach, iDocGhiFile {
     }
 
 
-    @Override
+    
     public void read() {
+        java.io.File testPath = new java.io.File("dsSanPham.txt"); 
+        System.out.println(">>> ĐƯỜNG DẪN JAVA ĐANG TÌM: " + testPath.getAbsolutePath());
         try {
-            BufferedReader br = new BufferedReader(new FileReader("D:\\Java\\QuanLyMyPham\\dsSanPham.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("D:\\Java\\QuanLyMyPham\\Danh Sach file\\dsSanPham.txt"));
             String line;
             int count = 0;
 
@@ -379,7 +382,7 @@ public class QuanLySanPham implements iQuanLyDanhSach, iDocGhiFile {
         }
     }
 
-    @Override
+    
     public void write() {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("D:\\Java\\QuanLyMyPham\\dsSanPham.txt", false));
@@ -488,7 +491,7 @@ public class QuanLySanPham implements iQuanLyDanhSach, iDocGhiFile {
         } while (chon != 0);
     }
 
-    @Override
+    
     public void xuatDanhSach(){
         if(soLuongSP == 0){
             System.out.println("Danh sach rong!");

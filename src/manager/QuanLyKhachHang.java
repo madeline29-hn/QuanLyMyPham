@@ -1,7 +1,8 @@
 package manager;
 import model.*;
-import model.iDocGhiFile;     
-import model.iQuanLyDanhSach;  
+import QuanLyMyPham.iDocGhiFile;
+import QuanLyMyPham.iQuanLyDanhSach;
+
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -78,7 +79,7 @@ public class QuanLyKhachHang implements iQuanLyDanhSach, iDocGhiFile {
         return false;
     }
 
-    @Override
+    
     public void themVaoDanhSach() {
         KhachHang khThem = new KhachHang();
         khThem.nhap(dsKhachHang, soLuongKH);
@@ -190,7 +191,7 @@ public class QuanLyKhachHang implements iQuanLyDanhSach, iDocGhiFile {
         dsKhachHang[soLuongKH++] = kh;
     }
 
-    @Override
+    
     public void xoaKhoiDanhSach(String ma) {
         for (int i = 0; i < soLuongKH; i++) {
             if (dsKhachHang[i].getMaKH().equalsIgnoreCase(ma)) {
@@ -206,7 +207,7 @@ public class QuanLyKhachHang implements iQuanLyDanhSach, iDocGhiFile {
         System.out.println("Khong tim thay ma khach hang: " + ma);
     }
 
-    @Override
+    
     public void suaDanhSach(String ma) {
         if (ma == null || ma.trim().isEmpty()) {
             System.out.println("Loi: Ma khach hang khong hop le!");
@@ -304,7 +305,7 @@ public class QuanLyKhachHang implements iQuanLyDanhSach, iDocGhiFile {
 
             case 4:
                 while (true) {
-                    System.out.print("Nhap ten email (truoc @) moi: ");
+                    System.out.print("Nhap ten email (truoc ) moi: ");
                     String emailName = sc.nextLine().trim();
 
                     if (emailName.isEmpty() || emailName.contains(" ")) {
@@ -312,7 +313,7 @@ public class QuanLyKhachHang implements iQuanLyDanhSach, iDocGhiFile {
                         continue;
                     }
 
-                    String email = emailName + "@gmail.com";
+                    String email = emailName + "gmail.com";
 
                     if (isTrungEmail(email) && !email.equalsIgnoreCase(khSua.getEmail())) {
                         System.out.println("Email bi trung! Vui long nhap lai.");
@@ -524,7 +525,7 @@ public class QuanLyKhachHang implements iQuanLyDanhSach, iDocGhiFile {
             }
         } while (chonSua != 0);
     }
-    @Override
+    
     public void timKiemChinhXac(String ma) {
         for (int i = 0; i < soLuongKH; i++) {
             if (dsKhachHang[i].getMaKH().equalsIgnoreCase(ma)) {
@@ -535,7 +536,7 @@ public class QuanLyKhachHang implements iQuanLyDanhSach, iDocGhiFile {
         System.out.println("Khong tim thay!");
     }
 
-    @Override
+    
     public void timKiemTuongDoi(String ten) {
         boolean found = false;
         for (int i = 0; i < soLuongKH; i++) {
@@ -547,12 +548,12 @@ public class QuanLyKhachHang implements iQuanLyDanhSach, iDocGhiFile {
         if (!found) System.out.println("Khong co ket qua phu hop.");
     }
 
-    @Override
+    
     public void thongKeTheoKhoa() {
         System.out.println("Tong so luong khach hang: " + soLuongKH);
     }
 
-    @Override
+    
     public void nhapDanhSach() {
         System.out.print("Nhap so luong khach hang muon nhap: ");
 
@@ -571,7 +572,7 @@ public class QuanLyKhachHang implements iQuanLyDanhSach, iDocGhiFile {
         }
     }
 
-    @Override
+    
     public void xuatDanhSach() {
         if (soLuongKH == 0) {
             System.out.println("Danh sach trong.");
@@ -711,7 +712,7 @@ public class QuanLyKhachHang implements iQuanLyDanhSach, iDocGhiFile {
         System.out.println("=".repeat(105));
     }
 
-    @Override
+    
     public void write() {
         try {
             java.io.File file = new java.io.File("D:\\Java\\QuanLyMyPham\\dsKhachHang.txt");
@@ -745,9 +746,10 @@ public class QuanLyKhachHang implements iQuanLyDanhSach, iDocGhiFile {
         return null;
     }
 
-    @Override
+    
     public void read() {
-        try (BufferedReader br = new BufferedReader(new FileReader("D:\\Java\\QuanLyMyPham\\dsKhachHang.txt"))) {
+    
+        try (BufferedReader br = new BufferedReader(new FileReader("D:\\Java\\QuanLyMyPham\\Danh Sach file\\dsKhachHang.txt"))) {
             String line;
             this.soLuongKH = 0;
             while ((line = br.readLine()) != null) {

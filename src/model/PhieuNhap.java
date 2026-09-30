@@ -359,7 +359,7 @@ public class PhieuNhap {
         }
         return s;
     }
-    @Override
+    
     public String toString() {
         String result = "\n========================= HOA DON NHAP HANG =========================\n";
         result += "Ma phieu nhap : " + maPhieuNhap + "\n";

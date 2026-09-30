@@ -1,14 +1,11 @@
 package manager;
 import model.*;
-import model.iDocGhiFile;     
-import model.iQuanLyDanhSach;  
+import QuanLyMyPham.iDocGhiFile;
+import QuanLyMyPham.iQuanLyDanhSach;
+
 import java.util.Arrays;
 import java.util.Scanner;
 import java.io.*;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.time.LocalDate;
 
 public class QuanLyNhanVien implements iQuanLyDanhSach, iDocGhiFile {
@@ -79,7 +76,7 @@ public class QuanLyNhanVien implements iQuanLyDanhSach, iDocGhiFile {
         soLuongNV++;
     }
 
-    @Override
+    
     public void themVaoDanhSach() {
 
         while (true) {
@@ -101,7 +98,7 @@ public class QuanLyNhanVien implements iQuanLyDanhSach, iDocGhiFile {
         }
     }
 
-    @Override
+    
     public void nhapDanhSach() {
         System.out.print("Nhap so luong nhan vien: ");
 
@@ -129,7 +126,7 @@ public class QuanLyNhanVien implements iQuanLyDanhSach, iDocGhiFile {
 
 
 
-    @Override
+    
     public void xoaKhoiDanhSach(String ma) {
 
         for (int i = 0; i < soLuongNV; i++) {
@@ -145,7 +142,7 @@ public class QuanLyNhanVien implements iQuanLyDanhSach, iDocGhiFile {
         System.out.println("Khong tim thay!");
     }
 
-    @Override
+    
     public void suaDanhSach(String ma) {
         NhanVien nvCanSua = null;
         for (int i = 0; i < soLuongNV; i++) {
@@ -263,7 +260,7 @@ public class QuanLyNhanVien implements iQuanLyDanhSach, iDocGhiFile {
                     break;
                 case 6:
                     while (true) {
-                        System.out.print("Nhap ten email (truoc @) moi: ");
+                        System.out.print("Nhap ten email (truoc ) moi: ");
                         String emailName = sc.nextLine().trim();
 
                         if (emailName.isEmpty() || emailName.contains(" ")) {
@@ -271,7 +268,7 @@ public class QuanLyNhanVien implements iQuanLyDanhSach, iDocGhiFile {
                             continue;
                         }
 
-                        String email = emailName + "@gmail.com";
+                        String email = emailName + "gmail.com";
 
                         if (isTrungEmail(email) && !email.equalsIgnoreCase(nvCanSua.getEmail())) {
                             System.out.println("Email bi trung!");
@@ -341,7 +338,7 @@ public class QuanLyNhanVien implements iQuanLyDanhSach, iDocGhiFile {
         System.out.println("Sua thong tin nhan vien thanh cong!");
     }
 
-    @Override
+    
     public void timKiemChinhXac(String ma) {
         for (int i = 0; i < soLuongNV; i++) {
             if (dsNhanVien[i].getMaNhanVien().equalsIgnoreCase(ma)) {
@@ -352,7 +349,7 @@ public class QuanLyNhanVien implements iQuanLyDanhSach, iDocGhiFile {
         System.out.println("Khong tim thay!");
     }
 
-    @Override
+    
     public void timKiemTuongDoi(String ten) {
         boolean found = false;
         for (int i = 0; i < soLuongNV; i++) {
@@ -364,7 +361,7 @@ public class QuanLyNhanVien implements iQuanLyDanhSach, iDocGhiFile {
         if (!found) System.out.println("Khong tim thay!");
     }
 
-    @Override
+    
     public void thongKeTheoKhoa() {
         System.out.println("Tong so nhan vien: " + soLuongNV);
     }
@@ -383,7 +380,7 @@ public class QuanLyNhanVien implements iQuanLyDanhSach, iDocGhiFile {
         }
     }
 
-    @Override
+    
     public void xuatDanhSach() {
         if (soLuongNV == 0) {
             System.out.println("Danh sach rong!");
@@ -575,7 +572,7 @@ public class QuanLyNhanVien implements iQuanLyDanhSach, iDocGhiFile {
                 case 4:
                     System.out.print("Nhap Email moi: ");
                     String email = sc.nextLine().trim();
-                    if (email.contains("@")) nv.setEmail(email);
+                    if (email.contains("")) nv.setEmail(email);
                     else System.out.println("(!) Loi: Email sai định dạng.");
                     break;
                 case 5:
@@ -626,7 +623,7 @@ public class QuanLyNhanVien implements iQuanLyDanhSach, iDocGhiFile {
         }
     }
 
-    @Override
+    
     public void write() {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("D:\\Java\\QuanLyMyPham\\dsNhanVien.txt"));
@@ -640,9 +637,11 @@ public class QuanLyNhanVien implements iQuanLyDanhSach, iDocGhiFile {
             System.out.println("Loi ghi file!");
         }
     }
-    @Override
+    
     public void read() {
-        File f = new File("D:\\Java\\QuanLyMyPham\\dsNhanVien.txt");
+        java.io.File testPath = new java.io.File("dsNhanVien.txt"); 
+        System.out.println(">>> ĐƯỜNG DẪN JAVA ĐANG TÌM: " + testPath.getAbsolutePath());
+        File f = new File("D:\\Java\\QuanLyMyPham\\Danh Sach file\\dsNhanVien.txt");
         if (!f.exists()) {
             System.out.println("Loi: File dsNhanVien.txt không tồn tại!");
             return;

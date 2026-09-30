@@ -55,7 +55,7 @@ public class DungCu extends SanPham{
         }  
     }
 
-    @Override
+    
     public String toString(){
         return super.toString() + String.format("|%-10s |", chatLieu);
     }

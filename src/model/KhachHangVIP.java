@@ -32,12 +32,12 @@ public class KhachHangVIP extends KhachHang {
         return 0;
     }
 
-    @Override
+    
     public String getVaiTro(){ 
         return laVIP() ? "Khach hang VIP" : "Khach hang thuong"; 
     }
 
-    @Override
+    
     public void nhap(KhachHang[] ds, int soLuong) {
         super.nhap(ds, soLuong);
         System.out.println("Da cap nhat KH");
@@ -59,11 +59,11 @@ public class KhachHangVIP extends KhachHang {
             System.out.println("Khong phai ngay sinh -> khong tang qua!");
         }
     }
-    @Override
+    
     public String toString() {
         return super.toString();
     }
-    @Override
+    
     public void xuat() {
         System.out.println(toString());
     }        

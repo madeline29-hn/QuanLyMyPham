@@ -81,10 +81,10 @@ public abstract class ConNguoi {
             }
         }
         while (true) {
-            System.out.print("Nhap ten email (truoc @): ");
+            System.out.print("Nhap ten email (truoc ): ");
             String emailName = sc.nextLine().trim();
             if (!emailName.isEmpty() && !emailName.contains(" ")) {
-                String fullEmail = emailName + "@gmail.com";
+                String fullEmail = emailName + "gmail.com";
                 boolean trung = false;
                 for (int i = 0; i < soLuong; i++) {
                     if (ds[i] != null && fullEmail.equalsIgnoreCase(ds[i].getEmail())) {
@@ -131,7 +131,7 @@ public abstract class ConNguoi {
         }
     }
 
-    @Override
+    
     public String toString() {
         return String.format("|%-20s |%-12s |%-25s |%-5s |%-12s|", hoTen, sdt, email, gioiTinh, ngaySinh);
     }

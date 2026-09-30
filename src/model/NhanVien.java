@@ -133,7 +133,7 @@ public abstract class NhanVien extends ConNguoi {
         this.chucVu = getVaiTro();
     }
 
-    @Override
+    
     public String toString() {
         String ngaySinhStr = (super.getNgaySinh() != null) ? super.getNgaySinh().toString() : "N/A";
         return String.format("| %-8s | %-22s | %-11s | %-13s | %-11s | %-5s | %-22s | %-10s | %-10s |",
