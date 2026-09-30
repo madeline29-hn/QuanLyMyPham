@@ -1,5 +1,7 @@
-package QuanLyMyPham;
-
+package manager;
+import model.*;
+import model.iDocGhiFile;     
+import model.iQuanLyDanhSach;  
 import java.util.Arrays;
 import java.util.Scanner;
 import java.io.BufferedReader;
@@ -578,7 +580,7 @@ public class QuanLyHoaDon implements iQuanLyDanhSach, iDocGhiFile {
 
     public void xuatDanhSach() {
         for(int i = 0 ; i < soLuongHoaDon ; i++ ) {
-            if(dsHoaDon[i] != null && dsHoaDon[i])
+            if(dsHoaDon[i] != null && dsHoaDon[i].DA_THANH_TOAN() == true )
                  dsHoaDon[i].xuat();
         }
     }

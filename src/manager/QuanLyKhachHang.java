@@ -1,4 +1,7 @@
-package QuanLyMyPham;
+package manager;
+import model.*;
+import model.iDocGhiFile;     
+import model.iQuanLyDanhSach;  
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -8,7 +11,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 
 public class QuanLyKhachHang implements iQuanLyDanhSach, iDocGhiFile {
-    private KhachHang[] dsKhachHang = new KhachHang[50]; //
+    private KhachHang[] dsKhachHang = new KhachHang[50];
     private int soLuongKH = 0;
     static Scanner sc = new Scanner(System.in);
 

@@ -1,4 +1,7 @@
-package QuanLyMyPham;
+package manager;
+import model.*;
+import model.iDocGhiFile;     
+import model.iQuanLyDanhSach;  
 import java.io.*;
 import java.time.LocalDate;
 import java.util.Arrays;

@@ -1,4 +1,5 @@
-package QuanLyMyPham;
+package model;
+import manager.*;
 import java.util.Scanner;
 public class TaiKhoan {
     private String tenDN;

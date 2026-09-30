@@ -1,4 +1,5 @@
-package QuanLyMyPham;
+package model;
+import manager.*;
 import java.time.LocalDate;
 import java.util.Scanner;
 

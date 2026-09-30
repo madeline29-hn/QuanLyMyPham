@@ -1,5 +1,5 @@
-package QuanLyMyPham;
-
+package model;
+import manager.*;
 import java.time.LocalDate;
 public class KhachHangVIP extends KhachHang {
     private double phanTramGiam;
